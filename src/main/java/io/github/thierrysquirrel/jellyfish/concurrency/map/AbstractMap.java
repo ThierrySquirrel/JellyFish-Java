@@ -16,6 +16,8 @@
 
 package io.github.thierrysquirrel.jellyfish.concurrency.map;
 
+import io.github.thierrysquirrel.jellyfish.concurrency.map.absent.MapAbsent;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -56,6 +58,24 @@ public abstract class AbstractMap<K, V> {
 
         return value;
 
+    }
+
+    public V getIfAbsent(K key, MapAbsent<K, V> mapAbsent) {
+        V value=null;
+        int mutexOffset = getMutexOffset(key);
+
+        this.locksContainer[mutexOffset].readLock().lock();
+        boolean find = containerAll[mutexOffset].containsKey(key);
+        if (find) {
+            value=containerAll[mutexOffset].get(key);
+        }else {
+            V absent = mapAbsent.absent(key);
+            this.containerAll[mutexOffset].put(key, absent);
+            value=absent;
+        }
+        this.locksContainer[mutexOffset].readLock().unlock();
+
+        return value;
     }
 
     public boolean isFind(K key) {
