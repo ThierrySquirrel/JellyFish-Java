@@ -1,5 +1,5 @@
 /**
- * Copyright 2025/1/19 ThierrySquirrel
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,10 @@ import java.util.concurrent.locks.ReadWriteLock;
 /**
  * Classname: AbstractMap
  * Description:
- * Date:2025/1/19
+ * Date:2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK21
+ * @since JDK25
  **/
 public abstract class AbstractMap<K, V> {
 
@@ -61,17 +61,17 @@ public abstract class AbstractMap<K, V> {
     }
 
     public V getIfAbsent(K key, MapAbsent<K, V> mapAbsent) {
-        V value=null;
+        V value = null;
         int mutexOffset = getMutexOffset(key);
 
         this.locksContainer[mutexOffset].readLock().lock();
         boolean find = containerAll[mutexOffset].containsKey(key);
         if (find) {
-            value=containerAll[mutexOffset].get(key);
-        }else {
+            value = containerAll[mutexOffset].get(key);
+        } else {
             V absent = mapAbsent.absent(key);
             this.containerAll[mutexOffset].put(key, absent);
-            value=absent;
+            value = absent;
         }
         this.locksContainer[mutexOffset].readLock().unlock();
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2025/1/19 ThierrySquirrel
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,10 +27,10 @@ import java.util.concurrent.locks.ReadWriteLock;
 /**
  * Classname: AbstractDeque
  * Description:
- * Date:2025/1/19
+ * Date:2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK21
+ * @since JDK25
  **/
 public abstract class AbstractDeque<V> {
     private Deque<V>[] containerAll;

@@ -1,5 +1,5 @@
 /**
- * Copyright 2026/2/26 ThierrySquirrel
+ * Copyright 2026/6/1 ThierrySquirrel
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,12 @@ package io.github.thierrysquirrel.jellyfish.concurrency.map.absent;
 /**
  * Classname: MapAbsent
  * Description:
- * Date:2026/2/26
+ * Date:2026/6/1
  *
  * @author ThierrySquirrel
- * @since JDK21
+ * @since JDK25
  **/
 @FunctionalInterface
-public interface MapAbsent<K,V> {
+public interface MapAbsent<K, V> {
     V absent(K key);
 }
