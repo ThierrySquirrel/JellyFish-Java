@@ -18,7 +18,9 @@ package io.github.thierrysquirrel.jellyfish.thread.agent;
 
 import io.github.thierrysquirrel.jellyfish.completable.future.CompletableFutureOne;
 import io.github.thierrysquirrel.jellyfish.concurrency.deque.array.ConcurrencyArrayDeque;
+import io.github.thierrysquirrel.jellyfish.thread.agent.constant.AbstractThreadAgentConstant;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Condition;
@@ -66,12 +68,18 @@ public abstract class AbstractThreadAgent implements Runnable {
                 this.isDeleteAll);
     }
 
+    protected void lockCall() {
+        containerMutex.lock();
+        call();
+        containerMutex.unlock();
+    }
+
     protected void lockAwait() {
         try {
             containerMutex.lock();
-            call();
-
-            containerCondition.await();
+            int defaultAwait = AbstractThreadAgentConstant.DEFAULT_AWAIT;
+            TimeUnit defaultAwaitTimeUnit = AbstractThreadAgentConstant.DEFAULT_AWAIT_TIME_UNIT;
+            containerCondition.await(defaultAwait, defaultAwaitTimeUnit);
             containerMutex.unlock();
         } catch (InterruptedException e) {
             String loeMsg = "lockAwait Error";
@@ -80,7 +88,7 @@ public abstract class AbstractThreadAgent implements Runnable {
     }
 
     protected void allInit() {
-        lockAwait();
+        lockCall();
     }
 
     private void call() {

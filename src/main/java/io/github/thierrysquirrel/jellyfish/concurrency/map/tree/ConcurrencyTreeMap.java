@@ -34,6 +34,9 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  **/
 public class ConcurrencyTreeMap<K, V> extends AbstractMap<K, V> {
 
+    public ConcurrencyTreeMap() {
+        super();
+    }
 
     public ConcurrencyTreeMap(int offset) {
         super(offset);

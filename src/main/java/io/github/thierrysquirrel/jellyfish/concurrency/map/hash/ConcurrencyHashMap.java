@@ -33,6 +33,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  **/
 public class ConcurrencyHashMap<K, V> extends AbstractMap<K, V> {
 
+    public ConcurrencyHashMap() {
+        super();
+    }
+
     public ConcurrencyHashMap(int offset) {
         super(offset);
     }

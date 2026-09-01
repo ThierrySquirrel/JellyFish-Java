@@ -54,7 +54,7 @@ Tasks executed according to plan. Thread is unique
 <dependency>
     <groupId>io.github.thierrysquirrel</groupId>
     <artifactId>jellyfish</artifactId>
-    <version>1.0.0.2-RELEASE</version>
+    <version>1.0.0.3-RELEASE</version>
 </dependency>
 ```
 

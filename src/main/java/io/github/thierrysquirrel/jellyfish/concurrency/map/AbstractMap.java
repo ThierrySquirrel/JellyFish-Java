@@ -17,6 +17,7 @@
 package io.github.thierrysquirrel.jellyfish.concurrency.map;
 
 import io.github.thierrysquirrel.jellyfish.concurrency.map.absent.MapAbsent;
+import io.github.thierrysquirrel.jellyfish.concurrency.map.constant.MapConstant;
 
 import java.util.Map;
 import java.util.Objects;
@@ -36,6 +37,10 @@ public abstract class AbstractMap<K, V> {
     private Map<K, V>[] containerAll;
     private int locksOffset;
     private ReadWriteLock[] locksContainer;
+
+    protected AbstractMap() {
+        init(MapConstant.DEFAULT_MAP_SIZE);
+    }
 
     protected AbstractMap(int offset) {
         init(offset);
